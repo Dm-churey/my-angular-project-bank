@@ -1,0 +1,68 @@
+@import 'src/styles.scss';
+
+.main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-blue;
+}
+  
+.content {
+    height: auto;
+    width: 600px;
+    background-color: $color-white;
+    //box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.welcome {
+    margin-top: 60px;
+    text-align: center;
+
+    &_text_header {
+        font-size: 40px;
+        margin-bottom: 15px;
+        color: $color-text;
+    }
+
+    &_text_body {
+        margin-top: 40px;
+        font-size: 20px;
+        color: $color-text;
+    }
+}
+  
+.button-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 60px;
+    //justify-content: space-between;
+}
+  
+button {
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: $button-border-radius;
+    border: 1px solid $color-blue;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: $color-white;
+    color: $color-blue;
+
+    &:hover {
+        background-color: $color-orange-primary;
+        border: 1px solid $color-orange-primary;
+        color: $color-white;
+    }
+
+    &:active {
+        background-color: $color-orange-active;
+        border: 1px solid $color-orange-active;
+        color: $color-white;
+    }
+}
