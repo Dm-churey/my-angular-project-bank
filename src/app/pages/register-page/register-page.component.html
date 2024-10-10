@@ -1,0 +1,121 @@
+<main class="main">
+    <div class="content">
+        <h1>Регистрация</h1>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="phoneNumber">Номер телефона:</label>
+                <input type="text" id="phoneNumber" formControlName="phoneNumber" mask="0 (000)000-00-00" prefix="+" [showMaskTyped]="false" placeholder="+7 (___)___-__-__" [ngClass]="{'invalid' : registrationForm.get('phoneNumber')?.invalid && registrationForm.get('phoneNumber')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('phoneNumber')?.invalid && (registrationForm.get('phoneNumber')?.dirty || registrationForm.get('phoneNumber')?.touched)" class="error-message">
+                    {{ getPhoneNumberErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="login">Логин:</label>
+                <input type="text" id="login" formControlName="login" placeholder="Введите логин" [ngClass]="{'invalid' : registrationForm.get('login')?.invalid && registrationForm.get('login')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('login')?.invalid && (registrationForm.get('login')?.dirty || registrationForm.get('login')?.touched)" class="error-message">
+                    {{ getLoginErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="email">Электронная почта:</label>
+                <input type="email" id="email" formControlName="email" placeholder="Введите почту" [ngClass]="{'invalid' : registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)" class="error-message">
+                    {{ getEmailErrorMessage() }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">Фамилия:</label>
+                <input type="text" id="firstName" formControlName="firstName" placeholder="Введите фамилию" [ngClass]="{'invalid' : registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('firstName')?.invalid && (registrationForm.get('firstName')?.dirty || registrationForm.get('firstName')?.touched)" class="error-message">
+                    {{ getFirstNameErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="lastName">Имя:</label>
+                <input type="text" id="lastName" formControlName="lastName" placeholder="Введите имя" [ngClass]="{'invalid' : registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('lastName')?.invalid && (registrationForm.get('lastName')?.dirty || registrationForm.get('lastName')?.touched)" class="error-message">
+                    {{ getLastNameErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="middleName">Отчество:</label>
+                <input type="text" id="middleName" formControlName="middleName" placeholder="Введите отчество" [ngClass]="{'invalid' : registrationForm.get('middleName')?.invalid && registrationForm.get('middleName')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('middleName')?.invalid && (registrationForm.get('middleName')?.dirty || registrationForm.get('middleName')?.touched)" class="error-message">
+                    {{ getMiddleNameErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="birthdate">Дата рождения:</label>
+                <mat-form-field appearance="fill" class="date-picker no-underline-input">
+                    <input matInput [matDatepicker]="picker" id="birthdate" formControlName="birthdate" placeholder="дд.мм.гггг" readonly [ngClass]="{'invalid' : registrationForm.get('birthdate')?.invalid && registrationForm.get('birthdate')?.touched}" class="form-control">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="registrationForm.get('birthdate')?.invalid && (registrationForm.get('birthdate')?.dirty || registrationForm.get('birthdate')?.touched)" class="error-message">
+                    {{ getBirthdateErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label >Пол:</label>
+                <mat-radio-group aria-label="Select an option" formControlName="sex">
+                    <mat-radio-button value="male">Мужской</mat-radio-button>
+                    <mat-radio-button value="female">Женский</mat-radio-button>
+                </mat-radio-group>
+                <div *ngIf="registrationForm.get('sex')?.invalid && (registrationForm.get('sex')?.dirty || registrationForm.get('sex')?.touched)">
+                    {{ getSexErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="address">Адрес:</label>
+                <input type="text" id="address" formControlName="address" placeholder="Введите адрес прописки" [ngClass]="{'invalid' : registrationForm.get('address')?.invalid && registrationForm.get('address')?.touched}" class="form-control">
+                <div *ngIf="registrationForm.get('address')?.invalid && (registrationForm.get('address')?.dirty || registrationForm.get('address')?.touched)" class="error-message">
+                    {{ getAddressErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="password">Придумайте пароль:</label>
+                <input  [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" (input)="onPasswordChange($event)" placeholder="Введите пароль" [ngClass]="{'invalid' : registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched}" class="form-control">
+                <span class="toggle-password">
+                    <button mat-icon-button matSuffix (click)="togglePasswordVisibility($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </span>
+
+                <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)" class="error-message">
+                    {{ getPasswordErrorMessage() }}
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="confirmPassword">Повторите пароль:</label>
+                <input [type]="hideConfirmPassword ? 'password' : 'text'" id="confirmPassword" formControlName="confirmPassword" placeholder="Повторите пароль" [ngClass]="{'invalid' : registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched}" class="form-control">
+                <span class="toggle-password">
+                    <button mat-icon-button matSuffix (click)="toggleConfirmPasswordVisibility($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+                        <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </span>
+
+                <div *ngIf="registrationForm.get('confirmPassword')?.invalid && (registrationForm.get('confirmPassword')?.dirty || registrationForm.get('confirmPassword')?.touched)" class="error-message">
+                    {{ getConfirmPasswordErrorMessage() }}
+                </div>
+            </div>
+
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        
+            <div class="button-container">
+                <button type="submit" [disabled]="!registrationForm.valid || registrationForm.disabled" class="button submit-button">Зарегистрироваться</button>
+                <button routerLink="/main" class="button back-button">Назад</button>
+            </div>
+            
+        </form>
+    </div>
+</main>
