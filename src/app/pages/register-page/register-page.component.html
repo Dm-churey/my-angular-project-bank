@@ -20,7 +20,7 @@
         
             <div class="form-group">
                 <label for="email">Электронная почта:</label>
-                <input type="email" id="email" formControlName="email" placeholder="Введите почту" [ngClass]="{'invalid' : registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched}" class="form-control">
+                <input type="text" id="email" formControlName="email" placeholder="Введите почту" [ngClass]="{'invalid' : registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched}" class="form-control">
                 <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)" class="error-message">
                     {{ getEmailErrorMessage() }}
                 </div>

@@ -41,7 +41,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     this.registrationForm = this.formBuilder.group({
       phoneNumber: ['', [Validators.required, this.validationService.phoneNumberValidator]],
       login: ['', [Validators.required, this.validationService.loginValidator]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, this.validationService.emailValidator]],
       firstName: ['', [Validators.required, this.validationService.firstNameValidator]],
       lastName: ['', [Validators.required, this.validationService.lastNameValidator]],
       middleName: ['', [Validators.required, this.validationService.middleNameValidator]],
@@ -103,7 +103,11 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.submitedForm = true;
           alert("Регистрация прошла успешно, вы можете войти используя указанные учетные данные.");
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], {
+            queryParams: {
+              registered: true
+            }
+          });
         },
         error: (error) => {
           this.errorMessage = error.error || 'Произошла ошибка при регистрации';
@@ -130,7 +134,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   getEmailErrorMessage() {
     const control = this.registrationForm.get('email');
     return control?.hasError('required') ? 'Обязательное поле' :
-           control?.hasError('email') ? 'Неверный формат email' : '';
+           control?.hasError('invalidCharacters') || control?.hasError('email') ? 'Неверный формат email' : '';
   }
 
   getFirstNameErrorMessage() {
@@ -156,7 +160,8 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
 
   getBirthdateErrorMessage() {
     const control = this.registrationForm.get('birthdate');
-    return control?.hasError('required') ? 'Обязательное поле' : '';
+    return control?.hasError('required') ? 'Обязательное поле' :
+           control?.hasError('invalidAge') ? 'Ваш возраст должен быть от 18 до 100 лет' : '';
   }
 
   getSexErrorMessage() {
@@ -167,14 +172,16 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   getAddressErrorMessage() {
     const control = this.registrationForm.get('address');
     return control?.hasError('required') ? 'Обязательное поле' :
-           control?.hasError('length') ? 'Адрес должен содержать от 1 до 100 символов' : '';
+           control?.hasError('length') ? 'Адрес должен содержать от 1 до 100 символов' : 
+           control?.hasError('invalidCharacters') ? 'Адрес содержит недопустимые символы' : '';
   }
 
   getPasswordErrorMessage() {
     const control = this.registrationForm.get('password');
     return control?.hasError('required') ? 'Обязательное поле' :
            control?.hasError('length') ? 'Пароль должен содержать от 9 до 30 символов' :
-           control?.hasError('missingRequirements') ? 'Пароль должен содержать заглавные буквы и спецсимволы' : 
+           control?.hasError('missingRequirements') ? 'Пароль должен содержать заглавные буквы и спецсимволы' :
+           control?.hasError('spaces') ? 'Пароль не должен содержать пробелов' :
            control?.hasError('notMatch') ? 'Введенные пароли не совпадают' : '';
   }
 

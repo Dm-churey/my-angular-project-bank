@@ -22,6 +22,21 @@ export class RegistrationValidationService {
     return null;
   };
 
+  emailValidator(control: AbstractControl): ValidationErrors | null {
+    const email = control.value;
+    const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!email) {
+      return { required: true };
+    }
+
+    if (!pattern.test(email)) {
+      return { invalidCharacters: true };
+    }
+
+    return null;
+  }
+
   loginValidator(control: AbstractControl): ValidationErrors | null {
     const login = control.value.toLowerCase();
       
@@ -94,6 +109,24 @@ export class RegistrationValidationService {
     return null;
   };
 
+  // birthDateValidator(control: AbstractControl): ValidationErrors | null {
+  //   const birthDate = control.value;
+    
+  //   if (!birthDate) {
+  //     return { required: true };
+  //   }
+
+  //   const currentDate = new Date();
+  //   const birthYear = new Date(birthDate).getFullYear();
+  //   const age = currentDate.getFullYear() - birthYear;
+
+  //   if (age < 18 || age > 100) {
+  //     return { invalidAge: true };
+  //   }
+
+  //   return null;
+  // }
+
   addressValidator(control: AbstractControl): ValidationErrors | null {
     const address = control.value;
 
@@ -103,6 +136,10 @@ export class RegistrationValidationService {
 
     if (address.length < 1 || address.length > 100) {
       return { length: true };
+    }
+
+    if (!/^(?!.*\s{2})[^\s].*[^\s]$/.test(address)) {
+      return { invalidCharacters: true };
     }
 
     return null;
@@ -121,6 +158,10 @@ export class RegistrationValidationService {
 
     if (!/^(?=.*[A-ZА-Я])(?=.*[!@#$&*()_+\-=]).+$/.test(password)) {
       return { missingRequirements: true };
+    }
+
+    if (!/^(?!.*\s)/.test(password)) {
+      return { spaces: true };
     }
 
     return null;
