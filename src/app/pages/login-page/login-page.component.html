@@ -19,7 +19,6 @@
                 <span *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">Обязательное поле</span>
             </div>
 
-            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
             <div class="button-container">
                 <button type="submit" [disabled]="!loginForm.valid || loginForm.disabled" class="button submit-button">Войти</button>
                 <a routerLink="/reset-password">Забыли пароль?</a>
