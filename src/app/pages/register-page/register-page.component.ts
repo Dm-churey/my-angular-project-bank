@@ -1,40 +1,40 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationValidationService } from 'src/app/services/registration-validation/registration-validation.service';
 import { AuthorizationService } from 'src/app/services/authorization-service/authorization.service';
 import { Router } from '@angular/router';
 import { RegisterInterface } from 'src/app/models/register';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
+import { ErrorsClass } from 'src/app/classes/errors-class';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
+  providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterPageComponent implements OnInit, OnDestroy {
+export class RegisterPageComponent extends ErrorsClass implements OnInit {
   registrationForm!: FormGroup;
   hidePassword = true;
   hideConfirmPassword = true;
   submitedForm: boolean = false;
-  errorMessage: any;
   aSub!: Subscription;
 
   constructor(
     private readonly formBuilder: FormBuilder, 
     private readonly validationService: RegistrationValidationService, 
     private readonly router: Router,
-    private readonly authService: AuthorizationService
-  ) { }
+    private readonly authService: AuthorizationService,
+    @Inject(DestroyService) private destroy$: Observable<void>,
+    snackBar: MatSnackBar,
+  ) { super(snackBar) }
 
   ngOnInit(): void {
     this.initForm();
-  }
-
-  ngOnDestroy(): void {
-    if (this.aSub) {
-      this.aSub.unsubscribe();
-    }
   }
 
   initForm() {
@@ -78,10 +78,6 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.registrationForm.valid) {
 
-      // const userData: RegisterInterface = {
-      //   ...this.registrationForm.value
-      // };
-
       const formValues = this.registrationForm.value;
     
       const userData: RegisterInterface = {
@@ -99,7 +95,9 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
 
       this.registrationForm.disable();
 
-      this.aSub = this.authService.registerUser(userData).subscribe({
+      this.authService.registerUser(userData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
         next: (response) => {
           this.submitedForm = true;
           alert("Регистрация прошла успешно, вы можете войти используя указанные учетные данные.");
@@ -110,7 +108,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
           });
         },
         error: (error) => {
-          this.errorMessage = error.error || 'Произошла ошибка при регистрации';
+          this.registerErrorResponce(error);
           //this.cdr.detectChanges();
           this.registrationForm.enable();
         }
