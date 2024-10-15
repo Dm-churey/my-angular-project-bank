@@ -1,1 +1,17 @@
-<p>site-page works!</p>
+<header class="header">
+    <nav class="header_nav">
+        <a class="header_nav_logo" routerLink="/home">
+            <img src="assets/images/bank-logo.svg" alt="Logo">
+            <p>Best Банк</p>
+        </a>
+        <div class="header_nav_conteiner" id="navbarSupportedContent">
+            <a class="header_nav_conteiner_route" routerLink="/home" routerLinkActive="active-link">Главная</a>
+            <a class="header_nav_conteiner_route" routerLink="/history" routerLinkActive="active-link">История</a>
+            <a class="header_nav_conteiner_route" routerLink="/profile" routerLinkActive="active-link">Личный кабинет</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
