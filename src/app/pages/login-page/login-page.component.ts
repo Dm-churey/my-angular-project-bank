@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
-import { ErrorsClass } from 'src/app/classes/errors-class';
+import { MessageClass } from 'src/app/classes/message-class';
 import { LoginIntreface } from 'src/app/models/login';
 import { AuthorizationService } from 'src/app/services/authorization-service/authorization.service';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
@@ -16,7 +16,7 @@ import { DestroyService } from 'src/app/services/destroy-service/destroy.service
   providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginPageComponent extends ErrorsClass implements OnInit {
+export class LoginPageComponent extends MessageClass implements OnInit {
 
   loginForm!: FormGroup;
   hidePassword = true;

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorsClass } from 'src/app/classes/errors-class';
+import { MessageClass } from 'src/app/classes/message-class';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
 import { takeUntil } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./main-page.component.scss'],
   providers: [DestroyService],
 })
-export class MainPageComponent extends ErrorsClass implements OnInit {
+export class MainPageComponent extends MessageClass implements OnInit {
 
   @Input() welcomeTextHeader: string = '';
   @Input() welcomeTextBody: string = '';

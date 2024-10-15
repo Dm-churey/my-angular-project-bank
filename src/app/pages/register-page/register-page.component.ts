@@ -8,7 +8,7 @@ import { Subscription, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
-import { ErrorsClass } from 'src/app/classes/errors-class';
+import { MessageClass } from 'src/app/classes/message-class';
 
 @Component({
   selector: 'app-register-page',
@@ -17,7 +17,7 @@ import { ErrorsClass } from 'src/app/classes/errors-class';
   providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterPageComponent extends ErrorsClass implements OnInit {
+export class RegisterPageComponent extends MessageClass implements OnInit {
   registrationForm!: FormGroup;
   hidePassword = true;
   hideConfirmPassword = true;
