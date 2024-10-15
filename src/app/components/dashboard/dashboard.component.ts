@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ErrorsClass } from 'src/app/classes/errors-class';
+import { MessageClass } from 'src/app/classes/message-class';
 import { AccountDataInterface } from 'src/app/models/account';
 import { CardDataInterface } from 'src/app/models/card';
 import { AccountsRequestsService } from 'src/app/services/accounts-requests-service/accounts-requests.service';
@@ -15,7 +15,7 @@ import { DestroyService } from 'src/app/services/destroy-service/destroy.service
   styleUrls: ['./dashboard.component.scss'],
   providers: [DestroyService]
 })
-export class DashboardComponent extends ErrorsClass implements OnInit {
+export class DashboardComponent extends MessageClass implements OnInit {
 
   cards: CardDataInterface[] = [];
   accounts: AccountDataInterface[] = [];
