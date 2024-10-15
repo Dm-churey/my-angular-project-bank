@@ -1,0 +1,14 @@
+<div [ngClass]="classesCard">
+    <div class="card_head">
+        <p class="card_head_text">{{ dataHead }}</p>
+        <img class="card_head_img" [src]="imageUrl">
+    </div>
+    <div class="card_body">
+        <p class="card_body_balance">{{ dataBalance }}</p>
+        <img class="card_body_img" [src]="imageUrlCurrency">
+    </div>
+    <div class="card_data">
+        <p class="card_data_left">{{ dataLeft }}</p>
+        <p class="card_data_right">{{ dataRight }}</p>
+    </div>  
+</div>
