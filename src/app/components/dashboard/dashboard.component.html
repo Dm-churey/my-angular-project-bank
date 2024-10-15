@@ -8,7 +8,7 @@
         <app-card routerLink="/new-card" [backgroundColor]="cards.length !== 0 ? 'primary-opacity' : 'primary'"></app-card>
         <ng-container *ngFor="let card of cards; trackBy: trackCard">
             <app-card 
-                [routerLink]="'/cards/' + card.id"
+                [routerLink]="'/card/' + card.id"
                 [imageUrl]="getCardImageUrl(card.cardProgram)"
                 [dataLeft]="formatCardNumber(card.number)"
                 [dataRight]="card.month + '/' + card.year"
@@ -30,7 +30,7 @@
         <app-card routerLink="/new-account" [backgroundColor]="accounts.length !== 0 ? 'secondary-opacity' : 'secondary'"></app-card>
         <ng-container *ngFor="let account of accounts; trackBy: trackAccount">
             <app-card 
-                [routerLink]="'/cards/' + account.id"
+                [routerLink]="'/account/' + account.id"
                 [imageUrl]="''"
                 [dataHead]="account.name"
                 [dataBalance]="account.balance"
