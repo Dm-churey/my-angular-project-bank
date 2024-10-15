@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor(private readonly authService: AuthorizationService, private readonly router: Router) {}
+    constructor(private readonly authService: AuthorizationService, private readonly router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.authService.isAuthenticated()) {
