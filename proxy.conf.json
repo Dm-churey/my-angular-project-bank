@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+      "target": "https://fw-ib-51862.psb-tech.ru",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+}

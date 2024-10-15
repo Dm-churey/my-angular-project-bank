@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+$color-orange-primary: #FF7043;
+$color-orange-active: #d44939;
+$color-text: #03053D;
+$color-blue: #2C2D84;
+$color-error: red;
+$color-white: #ffffff;
+$color-form: #B7B6B6;
+$coclor-button-disable: #737070;
+$color-input-focus: #F6F7FF;
+$button-border-radius: 27px;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//Стиль радиокнопок
+.mat-radio-container {
+    margin-left: 20px; /* Отступ между радио-кнопкой и текстом */
+}
+  .mat-radio-label-content {
+    font-size: 14px;
+    color: $color-blue;
+}
+
+.mat-radio-button:not(.mat-checked) .mat-radio-outer-circle {
+    border-color: $color-blue; /* Цвет контура */
+}
+  
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    //border-color: #2C2D84;
+    background-color: $color-orange-primary; /* Цвет выбранного состояния */
+}
+
+/* Стиль для выбранного состояния */
+.mat-radio-button.mat-accent .mat-radio-outer-circle {
+    border-color: $color-blue !important; /* Цвет контура при выборе */
+}
+  
+.mat-radio-button .mat-ripple-element {
+    background-color: $color-blue !important; /* Цвет ripple эффекта */
+}
+
+
+//Стиль datepicker
+.mat-datepicker-toggle-default-icon {
+    color: $color-text /* Цвет иконки календаря */
+}
+  
+.mat-datepicker-content {
+    background-color: #746e94; /* Фон датапикера */
+    border-color: #333; /* Цвет границы */
+}
+  
+.mat-calendar-body-selected {
+    background-color: $color-blue; /* Фон выбранной даты */
+    color: $color-white; /* Цвет текста выбранной даты */
+}
+  
+.mat-calendar-body-today {
+    border-color: $color-blue; /* Обводка текущей даты */
+}
+
+.no-underline-input {
+    border-bottom: none !important;
+}
