@@ -1,0 +1,68 @@
+@import 'src/styles.scss';
+
+.main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-blue;
+
+    .content {
+        margin: 30px;
+        height: 600px;
+        width: 550px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-size: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-image: url('../../../assets//images/pikaso_text-to-image_modern-style-detailled-illustration-A-vector-art-g.jpeg');
+        padding: 40px;
+        border-radius: 10px;
+    }
+      
+    h1 {
+        font-size: 48px;
+        margin-bottom: 40px;
+        font-weight: bold;
+        color: $color-orange-primary;
+    }
+      
+    h2 {
+        font-size: 32px;
+        color: $color-text;
+        margin-bottom: 10px;
+    }
+      
+    p {
+        color: $color-text;
+        font-size: 20px;
+        max-width: 400px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+      
+    .button {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: $color-orange-primary;
+        color: $color-white;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: $color-blue;
+        }
+
+        &:active {
+            background-color: $color-text;
+        }
+    }
+}
