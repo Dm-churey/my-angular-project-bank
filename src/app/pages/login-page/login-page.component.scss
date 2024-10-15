@@ -1,0 +1,150 @@
+@import 'src/styles.scss';
+
+.main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-blue;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+}
+  
+.content {
+    margin: 30px;
+    height: auto;
+    width: 550px;
+    background-color: $color-white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+h1 {
+    color: $color-text;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        margin-bottom: 8px;
+        font-size: 15px;
+        color: $color-text;
+    }
+
+    .form-control {
+        width: 525px;
+        padding: 12px 10px;
+        font-size: 14px;
+        border: 1px solid $color-form;
+        border-radius: 4px;
+        color: $color-text;
+        outline: none;
+        transition: all 0.3s ease;
+
+        &:focus{
+            border-color: $color-blue;
+            background-color: $color-input-focus;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+        }
+
+        &::placeholder {
+            color: $color-form;
+        }
+
+        &.invalid {
+            border-color: $color-error;
+            background-color: #fcd1bf;
+
+            &::placeholder {
+                color: #585555;
+            }
+        }
+    }
+
+    .toggle-password {
+        position: absolute;
+        //right: 495px;
+        //top: 144.3%;
+        //transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 1;
+
+        button {
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0;
+            cursor: pointer;
+
+            mat-icon {
+                color: $color-text;
+            }
+
+            &:hover {
+                color: $color-blue;
+            }
+        }
+    }
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    //justify-content: space-between;
+
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: $button-border-radius;
+    border: 1px solid $color-blue;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: $color-blue;
+    color: $color-white;
+
+    &:hover {
+        background-color: $color-orange-primary;
+        border: 1px solid $color-orange-primary;
+        color: $color-white;
+      }
+    
+    &:active {
+        background-color: $color-orange-active;
+        border: 1px solid $color-orange-active;
+        color: $color-white;
+    }
+
+    &:disabled{
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+a {
+    color: $color-orange-primary;
+
+    &:hover {
+        color: #fe9a7c;
+    }
+
+    &:active {
+        color: $color-orange-active;
+    }
+}
+
+.error-message {
+    color: $color-orange-primary;
+    //color: $color-error;
+    font-size: 12px;
+    margin-top: 5px;
+}

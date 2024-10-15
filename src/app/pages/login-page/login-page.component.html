@@ -1,0 +1,30 @@
+<main class="main">
+    <div class="content">
+        <h1>Авторизация в интернет-банке</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="login">Логин:</label>
+                <input type="text" id="login" formControlName="login" placeholder="Введите логин или email" [ngClass]="{'invalid' : loginForm.get('login')?.invalid && loginForm.get('login')?.touched}" class="form-control">
+                <span *ngIf="loginForm.get('login')?.invalid && (loginForm.get('login')?.dirty || loginForm.get('login')?.touched)" class="error-message">Обязательное поле</span>
+            </div>
+          
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" placeholder="Введите пароль" [ngClass]="{'invalid' : loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" class="form-control">
+                <span class="toggle-password">
+                    <button mat-icon-button matSuffix (click)="togglePasswordVisibility($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </span>
+                <span *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">Обязательное поле</span>
+            </div>
+
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+            <div class="button-container">
+                <button type="submit" [disabled]="!loginForm.valid || loginForm.disabled" class="button submit-button">Войти</button>
+                <a routerLink="/reset-password">Забыли пароль?</a>
+                <a routerLink="/registration">Я новый пользователь</a>
+            </div>
+        </form>
+    </div>
+</main>
