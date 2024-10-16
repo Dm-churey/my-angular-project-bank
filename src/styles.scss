@@ -1,5 +1,7 @@
 $color-orange-primary: #FF7043;
 $color-orange-active: #d44939;
+$color-succes-message: #21ca2a;
+$color-black: black;
 $color-text: #03053D;
 $color-blue: #2C2D84;
 $color-error: red;
@@ -10,7 +12,7 @@ $color-input-focus: #F6F7FF;
 $button-border-radius: 27px;
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: flex; flex-direction: column; }
 
 //Стиль радиокнопок
 .mat-radio-container {
@@ -61,4 +63,34 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .no-underline-input {
     border-bottom: none !important;
+}
+
+
+//Стиль SnackBar
+.snackbar-container {
+    background-color: $color-input-focus !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+
+    &_error {
+        color: $color-orange-primary !important;
+    }
+
+    &_success {
+        color: $color-succes-message;
+    }
+}
+
+
+//Стиль Loader
+.mat-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    circle {
+        stroke: $color-orange-primary;
+        stroke-opacity: 0.7;
+    }
 }

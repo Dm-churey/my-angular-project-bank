@@ -108,8 +108,6 @@
                     {{ getConfirmPasswordErrorMessage() }}
                 </div>
             </div>
-
-            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         
             <div class="button-container">
                 <button type="submit" [disabled]="!registrationForm.valid || registrationForm.disabled" class="button submit-button">Зарегистрироваться</button>

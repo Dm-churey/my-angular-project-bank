@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { RegisterInterface } from 'src/app/models/register';
 import { LoginIntreface } from 'src/app/models/login';
-import { BASE_API_URL } from 'src/app/models/api';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,6 @@ import { BASE_API_URL } from 'src/app/models/api';
 export class AuthorizationService {
 
   private accessToken = '';
-  private refreshToken = '';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -27,19 +25,12 @@ export class AuthorizationService {
           localStorage.setItem('auth-accessToken', accessToken);
           this.setAccessToken(accessToken);
         }
-      ),
-      tap(
-        ({refreshToken}) => {
-          localStorage.setItem('auth-refreshToken', refreshToken);
-          this.setRefreshToken(refreshToken);
-        }
       )
     )
   };
 
   logoutUser() {
     this.setAccessToken('');
-    this.setRefreshToken('');
     localStorage.clear();
   };
 
@@ -49,14 +40,6 @@ export class AuthorizationService {
 
   getAccessToken(): string {
     return this.accessToken;
-  };
-
-  setRefreshToken(refreshToken: string) {
-    this.refreshToken = refreshToken;
-  };
-
-  getRefreshToken(): string {
-    return this.refreshToken;
   };
 
   isAuthenticated(): boolean {

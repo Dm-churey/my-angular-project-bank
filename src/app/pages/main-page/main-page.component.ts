@@ -1,21 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageClass } from 'src/app/classes/message-class';
+import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
+  providers: [DestroyService],
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent extends MessageClass implements OnInit {
 
   @Input() welcomeTextHeader: string = '';
   @Input() welcomeTextBody: string = '';
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private destroy$: DestroyService,
+    snackBar: MatSnackBar
+  ) {super(snackBar)}
 
   ngOnInit(): void {
-    this.welcomeTextHeader = 'Добро пожаловать в лучший интернет-банк "Best Bank"';
+    this.welcomeTextHeader = 'Добро пожаловать в лучший интернет-банк "Best Банк"';
     this.welcomeTextBody = 'Чтобы начать пользоваться нашими предложениями прямо сейчас, выполните вход в личный кабинет или пройдите регистрацию';
+  
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: Params) => {
+      if (params['sessionFaild']) {
+        this.sessionErrorResponce();
+      }
+    })
   }
 
   clickToLogin(): void {

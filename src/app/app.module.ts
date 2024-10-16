@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +11,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { NgxMaskModule } from 'ngx-mask';
 import { BASE_API_URL } from './models/api';
@@ -24,6 +26,10 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { AppDateAdapter, APP_DATE_FORMATS } from './adapters/date-adapter';
 import { DataChangesGuard } from './guards/can-deactivate-form.guard';
 import { SitePageComponent } from './pages/site-page/site-page.component';
+import { TokenInterceptor } from './guards/token.interceptor';
+import { CardComponent } from './components/card/card.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,9 @@ import { SitePageComponent } from './pages/site-page/site-page.component';
     RegisterPageComponent,
     NotFoundPageComponent,
     SitePageComponent,
+    CardComponent,
+    DashboardComponent,
+    PersonalProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,16 +56,19 @@ import { SitePageComponent } from './pages/site-page/site-page.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
     NgxMaskModule.forRoot(),
   ],
   exports: [
     RouterModule
   ],
   providers: [
-    { provide: BASE_API_URL, useValue: 'https://fw-ib-51862.psb-tech.ru' },
+    //{ provide: BASE_API_URL, useValue: 'https://fw-ib-51862.psb-tech.ru' },
     DataChangesGuard,
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    { provide: HTTP_INTERCEPTORS, multi: true, useClass: TokenInterceptor },
   ],
   bootstrap: [AppComponent]
 })

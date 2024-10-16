@@ -1,0 +1,72 @@
+@import 'src/styles.scss';
+
+.header {
+    width: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-around;
+    //position: fixed;
+    z-index: 1000;
+    background-color: $color-input-focus;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &_nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_logo  {
+            width: 220px;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img{
+                width: 50px;
+            }
+
+            p {
+                margin-bottom: 0px;
+                font-size: 30px;
+                font-weight: bold;
+                color: $color-black;
+                transition: color 0.3s ease;
+            }
+        }
+
+        &_conteiner {
+            margin-left: 275px;
+            display: flex;
+            gap: 40px;
+    
+            &_route {
+                font-size: 16px;
+                color: $color-black;
+                text-decoration: none;
+                transition: color 0.3s ease;
+    
+                &:hover {
+                    color: #ccc;
+                }
+            }
+        }
+    }
+}
+
+.active-link {
+    font-weight: bold;
+}
+
+main {
+    //min-height: calc(100vh - 92px); // Высота header + padding
+    width: 920px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 32px;
+}

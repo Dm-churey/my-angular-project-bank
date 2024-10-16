@@ -1,0 +1,46 @@
+<div *ngIf="!loadingCard && !loadingAccount" class="card-conteiner">
+    <div class="card-conteiner_top">
+        <h2 class="card-conteiner_top_text">Мои карты</h2>
+        <a class="card-conteiner_top_routes_route" routerLink="/new-card">Заказать карту</a>
+    </div>
+    
+    <div class="card-conteiner_cards">
+        <app-card routerLink="/new-card" [backgroundColor]="cards.length !== 0 ? 'primary-opacity' : 'primary'"></app-card>
+        <ng-container *ngFor="let card of cards; trackBy: trackCard">
+            <app-card 
+                [routerLink]="'/cards/' + card.id"
+                [imageUrl]="getCardImageUrl(card.cardProgram)"
+                [dataLeft]="formatCardNumber(card.number)"
+                [dataRight]="card.month + '/' + card.year"
+            ></app-card>
+        </ng-container>
+    </div>
+</div>
+
+<div *ngIf="!loadingAccount && !loadingCard" class="card-conteiner">
+    <div class="card-conteiner_top">
+        <h2 class="card-conteiner_top_text">Мои счета</h2>
+        <div class="card-conteiner_top_routes">
+            <a class="card-conteiner_top_routes_route" routerLink="/example">Пополнить</a>
+            <a class="card-conteiner_top_routes_route" routerLink="/new-account">Открыть счет</a>
+        </div>
+    </div>
+
+    <div class="card-conteiner_cards">
+        <app-card routerLink="/new-account" [backgroundColor]="accounts.length !== 0 ? 'secondary-opacity' : 'secondary'"></app-card>
+        <ng-container *ngFor="let account of accounts; trackBy: trackAccount">
+            <app-card 
+                [routerLink]="'/cards/' + account.id"
+                [imageUrl]="''"
+                [dataHead]="account.name"
+                [dataBalance]="account.balance"
+                [imageUrlCurrency]="getCurrencyIconUrl(account.currency)"
+                [dataLeft]="account.number"
+                [backgroundColor]="'secondary'"
+            ></app-card>
+        </ng-container>
+    </div>
+</div>
+<mat-spinner *ngIf="loadingAccount || loadingCard" class="mat-spinner"></mat-spinner>
+
+<!-- [imageUrl]="card.cardProgram ? cardImageMap[card.cardProgram] || '' : ''" -->

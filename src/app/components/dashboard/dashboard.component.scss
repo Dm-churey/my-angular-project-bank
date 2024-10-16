@@ -1,0 +1,68 @@
+@import 'src/styles.scss';
+
+.card-conteiner {
+    display: flex;
+    flex-direction: column;
+    width: 920px;
+    margin-bottom: 32px;
+
+    &_top {
+        height: 23px;
+        display: flex;
+        justify-content: space-between;
+        color: $color-text;
+        align-items: center;
+
+        &_text {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 0;
+        }
+
+        &_routes {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+
+            &_route {
+                color: $color-text;
+                font-size: 15px;
+    
+                &:hover {
+                    opacity: 0.6;
+                }
+    
+                &:active {
+                    color: $color-orange-primary;
+                }
+            }
+        }
+    }
+
+    &_cards {
+        margin-top: 10px;
+        border-radius: 20px;
+        background-color: $color-input-focus;
+        display: flex;
+        justify-content: left;
+        padding: 29px;
+        gap: 20px;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        &:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    }
+}
