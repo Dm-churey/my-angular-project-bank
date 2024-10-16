@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MessageClass } from 'src/app/classes/message-class';
 import { AccountDataInterface } from 'src/app/models/account';
@@ -26,7 +25,6 @@ export class DashboardComponent extends MessageClass implements OnInit {
     private readonly cardsReqService: CardsRequestsService,
     private readonly accountsReqService: AccountsRequestsService,
     snackBar: MatSnackBar,
-    //@Inject(DestroyService) private destroy$: Observable<void> 
     private destroy$: DestroyService
   ) { super(snackBar) }
 
@@ -91,18 +89,4 @@ export class DashboardComponent extends MessageClass implements OnInit {
         return '';
     }
   }
-
-  getCurrencyIconUrl(currency: number): string {
-    switch (currency) {
-      case 643:
-        return 'assets/images/ruble_white.svg';
-      case 840:
-        return 'assets/images/dollar_white.svg';
-      case 978:
-        return 'assets/images/euro_symbol_white.svg';
-      default:
-        return '';
-    }
-  }
-
 }
