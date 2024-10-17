@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { RegisterPageComponent } from "../pages/register-page/register-page.component";
+import { RegisterPageComponent } from "../pages/register-page/register-page-component/register-page.component";
 
 @Injectable()
 export class DataChangesGuard
