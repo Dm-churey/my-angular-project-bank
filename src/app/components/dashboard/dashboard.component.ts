@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MessageClass } from 'src/app/classes/message-class';
 import { AccountDataInterface } from 'src/app/models/account';
@@ -13,12 +14,14 @@ import { DestroyService } from 'src/app/services/destroy-service/destroy.service
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [DestroyService],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent extends MessageClass implements OnInit {
 
   cards: CardDataInterface[] = [];
   accounts: AccountDataInterface[] = [];
+  // cards$: Observable<AccountDataInterface[]> | undefined;
+  // accounts$: Observable<AccountDataInterface[]> | undefined;
   loadingCard: boolean = false;
   loadingAccount: boolean = false;
 
@@ -26,6 +29,7 @@ export class DashboardComponent extends MessageClass implements OnInit {
     private readonly cardsReqService: CardsRequestsService,
     private readonly accountsReqService: AccountsRequestsService,
     snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
     private destroy$: DestroyService
   ) { super(snackBar) }
 
@@ -43,6 +47,7 @@ export class DashboardComponent extends MessageClass implements OnInit {
       next: (cards) => {
         this.loadingCard = false;
         this.cards = cards;
+        //this.cdr.detectChanges();
       },
       error: (error) => {
         this.cardsAndAccountsErrorResponce(error);
@@ -57,6 +62,7 @@ export class DashboardComponent extends MessageClass implements OnInit {
       next: (accounts) => {
         this.loadingAccount = false;
         this.accounts = accounts;
+        //this.cdr.detectChanges();
       },
       error: (error) => {
         this.cardsAndAccountsErrorResponce(error);
