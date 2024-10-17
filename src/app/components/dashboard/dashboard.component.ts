@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntil } from 'rxjs/operators';
 import { MessageClass } from 'src/app/classes/message-class';
@@ -12,7 +12,8 @@ import { DestroyService } from 'src/app/services/destroy-service/destroy.service
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [DestroyService]
+  providers: [DestroyService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent extends MessageClass implements OnInit {
 
