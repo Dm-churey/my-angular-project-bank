@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegistrationValidationService } from 'src/app/services/registration-validation/registration-validation.service';
+import { RegistrationValidationService } from 'src/app/pages/register-page/registration-validation/registration-validation.service';
 import { AuthorizationService } from 'src/app/services/authorization-service/authorization.service';
 import { Router } from '@angular/router';
 import { RegisterInterface } from 'src/app/models/register';
