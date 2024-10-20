@@ -27,7 +27,7 @@
     </div>
 
     <div class="card-conteiner_cards">
-        <app-card routerLink="/new-account" [backgroundColor]="accounts.length !== 0 ? 'secondary-opacity' : 'secondary'"></app-card>
+        <app-card routerLink="/new-account" [dataLeft]="'Открыть'" [backgroundColor]="accounts.length !== 0 ? 'secondary-opacity' : 'secondary'"></app-card>
         <ng-container *ngFor="let account of accounts; trackBy: trackAccount">
             <app-card 
                 [routerLink]="'/account/' + account.id"
@@ -40,6 +40,6 @@
         </ng-container>
     </div>
 </div>
-<mat-spinner *ngIf="loadingAccount || loadingCard" class="mat-spinner"></mat-spinner>
+<mat-spinner *ngIf="loadingCard || loadingAccount" class="mat-spinner"></mat-spinner>
 
 <!-- [imageUrl]="card.cardProgram ? cardImageMap[card.cardProgram] || '' : ''" -->

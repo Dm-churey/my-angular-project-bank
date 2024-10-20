@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RegistrationValidationService {
 
   phoneNumberValidator(control: AbstractControl): ValidationErrors | null {
