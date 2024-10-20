@@ -1,0 +1,131 @@
+@import 'src/styles.scss';
+
+.profile-conteiner {
+    display: flex;
+    flex-direction: column;
+    width: 920px;
+    margin-bottom: 32px;
+
+    &_top {
+        height: 23px;
+        display: flex;
+        justify-content: space-between;
+        color: $color-text;
+        align-items: center;
+        
+        &_text {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 0;
+        }
+
+        &_route {
+            color: $color-text;
+            font-size: 15px;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &:active {
+                color: $color-orange-primary;
+            } 
+        }
+    }
+
+    &_data {
+        margin-top: 10px;
+        border-radius: 20px;
+        background-color: $color-input-focus;
+        display: flex;
+        justify-content: left;
+        padding: 29px;
+        gap: 30px;
+
+        &_img {
+            max-width: 100px;
+            width: auto;
+        }
+
+        &_string {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 30px;
+
+            &_top {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                &_name {
+                    color: $color-text;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                }
+            }
+
+            &_bottom {
+                display: flex;
+                justify-content: space-between;
+                gap: 40px;
+
+                &_email {
+                    font-size: 15px;
+                    color: $color-text;
+                    margin-bottom: 0;
+                }
+            }
+
+            &_row {
+                display: flex;
+                flex-direction: column;
+
+                &_field {
+                    font-size: 15px;
+                    font-weight: bold;
+                    color: $color-text;
+                    margin-bottom: 0;
+                }
+    
+                &_value {
+                    font-size: 15px;
+                    color: $color-text;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+.div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .button-logout {
+        margin: auto;
+        align-items: center;
+        //margin-left: 383px;
+        width: 154px;
+        height: 37px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: $color-blue;
+        color: $color-white;
+        border-radius: 10px;
+    
+        &:hover {
+            background-color: $color-orange-primary;
+        }
+    
+        &:active {
+            background-color: $color-orange-active;
+        }
+    }
+}

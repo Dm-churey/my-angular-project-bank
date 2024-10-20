@@ -30,8 +30,13 @@ export class AuthorizationService {
   };
 
   logoutUser() {
-    this.setAccessToken('');
-    localStorage.clear();
+    return this.http.delete('/api/authorization/logout')
+    .pipe(
+      tap(() => {
+        this.setAccessToken('');
+        localStorage.clear();
+      })
+    );
   };
 
   setAccessToken(accessToken: string) {

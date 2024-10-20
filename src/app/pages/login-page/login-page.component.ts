@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Inject }
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { MessageClass } from 'src/app/classes/message-class';
 import { LoginIntreface } from 'src/app/models/login';
@@ -20,7 +19,6 @@ export class LoginPageComponent extends MessageClass implements OnInit {
 
   loginForm!: FormGroup;
   hidePassword = true;
-  aSub!: Subscription;
 
   constructor(
     private readonly formBuilder: FormBuilder, 
@@ -28,7 +26,7 @@ export class LoginPageComponent extends MessageClass implements OnInit {
     private readonly router: Router, 
     private readonly route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    @Inject(DestroyService) private destroy$: Observable<void>,
+    private destroy$: DestroyService,
     snackBar: MatSnackBar,      
   ) { super(snackBar) }
 

@@ -75,7 +75,7 @@
         
             <div class="form-group">
                 <label for="address">Адрес:</label>
-                <input type="text" id="address" formControlName="address" placeholder="Введите адрес прописки" [ngClass]="{'invalid' : registrationForm.get('address')?.invalid && registrationForm.get('address')?.touched}" class="form-control">
+                <input type="text" id="address" formControlName="address" placeholder="Введите адрес проживания" [ngClass]="{'invalid' : registrationForm.get('address')?.invalid && registrationForm.get('address')?.touched}" class="form-control">
                 <div *ngIf="registrationForm.get('address')?.invalid && (registrationForm.get('address')?.dirty || registrationForm.get('address')?.touched)" class="error-message">
                     {{ getAddressErrorMessage() }}
                 </div>

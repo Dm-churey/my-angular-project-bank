@@ -1,1 +1,57 @@
+<div class="div">
+    <div *ngIf="client$ | async as client; else loader">
 
+        <div class="profile-conteiner">
+            <div class="profile-conteiner_top">
+                <h2 class="profile-conteiner_top_text">Личный кабинет</h2>
+                <a class="profile-conteiner_top_route" routerLink="/new-card">Настройки</a>
+            </div>
+            
+            <div class="profile-conteiner_data" >
+                <img class="profile-conteiner_data_img" [src]="imageUrl">
+                <div class="profile-conteiner_data_string">
+                    <div class="profile-conteiner_data_string_top">
+                        <p class="profile-conteiner_data_string_top_name">{{ client.firstName }}</p>
+                        <p class="profile-conteiner_data_string_top_name">{{ client.lastName }} {{ client.middleName }}</p>
+                    </div>
+                    <div class="profile-conteiner_data_string_bottom">
+                        <p class="profile-conteiner_data_string_bottom_email">{{ client.phoneNumber | phoneNumber }}</p>
+                        <p class="profile-conteiner_data_string_bottom_email">{{ client.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-conteiner">
+            <div class="profile-conteiner_top">
+                <h2 class="profile-conteiner_top_text">Мои данные</h2>
+                <a class="profile-conteiner_top_route" routerLink="/new-card">Редактировать</a>
+            </div>
+            
+            <div class="profile-conteiner_data">
+                <div class="profile-conteiner_data_string">
+                    <div class="profile-conteiner_data_string_row">
+                        <p class="profile-conteiner_data_string_row_field">Дата рождения</p>
+                        <p class="profile-conteiner_data_string_row_value">{{ client.birthdate | birthdate }}</p>
+                    </div>
+                    <div class="profile-conteiner_data_string_row">
+                        <p class="profile-conteiner_data_string_row_field">Адрес проживания</p>
+                        <p class="profile-conteiner_data_string_row_value">{{ client.address }}</p>
+                    </div>
+                    <div class="profile-conteiner_data_string_row">
+                        <p class="profile-conteiner_data_string_row_field">Паспортные данные</p>
+                        <p class="profile-conteiner_data_string_row_value">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <button (click)="onLogout()" class="button-logout">Выйти</button>
+</div>
+
+
+<ng-template #loader>
+    <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-template>

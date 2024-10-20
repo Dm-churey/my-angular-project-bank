@@ -4,7 +4,6 @@ import { RegistrationValidationService } from 'src/app/services/registration-val
 import { AuthorizationService } from 'src/app/services/authorization-service/authorization.service';
 import { Router } from '@angular/router';
 import { RegisterInterface } from 'src/app/models/register';
-import { Subscription, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
@@ -22,14 +21,13 @@ export class RegisterPageComponent extends MessageClass implements OnInit {
   hidePassword = true;
   hideConfirmPassword = true;
   submitedForm: boolean = false;
-  aSub!: Subscription;
 
   constructor(
     private readonly formBuilder: FormBuilder, 
     private readonly validationService: RegistrationValidationService, 
     private readonly router: Router,
     private readonly authService: AuthorizationService,
-    @Inject(DestroyService) private destroy$: Observable<void>,
+    private destroy$: DestroyService,
     snackBar: MatSnackBar,
   ) { super(snackBar) }
 

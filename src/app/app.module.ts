@@ -15,6 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { NgxMaskModule } from 'ngx-mask';
+import { CurrencyPipe } from '@angular/common';
 import { BASE_API_URL } from './models/api';
 
 import { AppComponent } from './app.component';
@@ -30,6 +31,9 @@ import { TokenInterceptor } from './guards/token.interceptor';
 import { CardComponent } from './components/card/card.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
+import { BalancePipe } from './pipes/balance-pipe/balance.pipe';
+import { PhoneNumberPipe } from './pipes/phone-number-pipe/phone-number.pipe';
+import { BirthdatePipe } from './pipes/date-pipe/birthdate.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,9 @@ import { PersonalProfileComponent } from './components/personal-profile/personal
     CardComponent,
     DashboardComponent,
     PersonalProfileComponent,
+    BalancePipe,
+    PhoneNumberPipe,
+    BirthdatePipe,
   ],
   imports: [
     BrowserModule,
@@ -61,14 +68,14 @@ import { PersonalProfileComponent } from './components/personal-profile/personal
     NgxMaskModule.forRoot(),
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ],
   providers: [
-    //{ provide: BASE_API_URL, useValue: 'https://fw-ib-51862.psb-tech.ru' },
     DataChangesGuard,
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: TokenInterceptor },
+    CurrencyPipe,
   ],
   bootstrap: [AppComponent]
 })

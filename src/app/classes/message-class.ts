@@ -1,4 +1,5 @@
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { EMPTY, Observable } from "rxjs";
 
 export class MessageClass {
 
@@ -41,6 +42,21 @@ export class MessageClass {
 
     cardsAndAccountsErrorResponce(error: any) {
         this.snackBar.open(error.error || 'Ошибка при загрузке данных', 'Закрыть', {
+            duration: 4000,
+            panelClass: ['snackbar-container_error']
+        });
+    }
+
+    getClientErrorResponce(error: any): Observable<any> {
+        this.snackBar.open(error.error || 'Ошибка при загрузке данных пользователя', 'Закрыть', {
+            duration: 4000,
+            panelClass: ['snackbar-container_error']
+        });
+        return EMPTY;
+    }
+
+    logoutErrorResponce(error: any) {
+        this.snackBar.open(error.error || 'Произошла ошибка, попробуйте заново', 'Закрыть', {
             duration: 4000,
             panelClass: ['snackbar-container_error']
         });

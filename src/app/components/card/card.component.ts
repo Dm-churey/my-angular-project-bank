@@ -9,8 +9,7 @@ export class CardComponent implements OnInit {
 
   @Input() dataHead: string = '';
   @Input() imageUrl: string = 'assets/images/add-circle.svg';
-  @Input() dataBalance?: number;
-  @Input() imageUrlCurrency: string = '';
+  @Input() dataBalance?: string;
   @Input() dataLeft: string = 'Заказать';
   @Input() dataRight: string = '';
   @Input() backgroundColor: 'primary' | 'secondary' | 'primary-opacity' | 'secondary-opacity' = 'primary';
