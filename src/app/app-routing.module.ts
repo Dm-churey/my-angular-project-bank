@@ -1,13 +1,18 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MainPageComponent } from './pages/main-page/main-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page-component/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SitePageComponent } from './pages/site-page/site-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DataChangesGuard } from './guards/can-deactivate-form.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
+import { NewCardComponent } from './components/new-card/new-card.component';
+import { NewCardOrderComponent } from './components/new-card-order/new-card-order.component';
+import { OperationsGuard } from './guards/operations.guard';
+import { ConfirmOrderComponent } from './components/confirm-order/confirm-order.component';
+import { CanDeactivateOperationsGuard } from './guards/can-deactivate-operations.guard';
+import { ExitOrderComponent } from './components/exit-order/exit-order.component';
+import { NewAccountComponent } from './components/new-account/new-account.component';
 
 const routes: Routes = [
     { path: 'main', component: MainPageComponent },
@@ -33,6 +38,11 @@ const routes: Routes = [
             { path: '', redirectTo: '/home', pathMatch: 'full' },
             { path: 'home', component: DashboardComponent },
             { path: 'profile', component: PersonalProfileComponent },
+            { path: 'new-card', component: NewCardComponent },
+            { path: 'order', component: NewCardOrderComponent, canActivate: [OperationsGuard], canDeactivate: [CanDeactivateOperationsGuard] },
+            { path: 'confirm-order', component: ConfirmOrderComponent, canActivate: [OperationsGuard], canDeactivate: [CanDeactivateOperationsGuard] },
+            { path: 'exit-order', component: ExitOrderComponent },
+            { path: 'new-account', component:NewAccountComponent },
         ]
     },
     { path: '**', component: NotFoundPageComponent },
