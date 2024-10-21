@@ -12,7 +12,7 @@ export class CardComponent implements OnInit {
   @Input() dataBalance?: string;
   @Input() dataLeft: string = 'Заказать';
   @Input() dataRight: string = '';
-  @Input() backgroundColor: 'primary' | 'secondary' | 'primary-opacity' | 'secondary-opacity' = 'primary';
+  @Input() backgroundColor: 'primary' | 'secondary' | 'tertiary' | 'primary-opacity' | 'secondary-opacity' = 'primary';
 
   ngOnInit(): void {}
 

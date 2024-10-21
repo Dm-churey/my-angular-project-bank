@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Input } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { MessageClass } from 'src/app/classes/message-class';
+import { MessageService } from 'src/app/services/message-service/message.service';
 import { AccountDataInterface } from 'src/app/models/account';
 import { CardDataInterface } from 'src/app/models/card';
 import { AccountsRequestsService } from 'src/app/services/accounts-requests-service/accounts-requests.service';
 import { CardsRequestsService } from 'src/app/services/cadrs-requests-service/cards-requests.service';
+import { ClientRequestsService } from 'src/app/services/client-requests-service/client-requests.service';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
 
 @Component({
@@ -14,30 +13,42 @@ import { DestroyService } from 'src/app/services/destroy-service/destroy.service
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [DestroyService],
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent extends MessageClass implements OnInit {
+export class DashboardComponent implements OnInit {
 
   cards: CardDataInterface[] = [];
   accounts: AccountDataInterface[] = [];
-  // cards$: Observable<AccountDataInterface[]> | undefined;
-  // accounts$: Observable<AccountDataInterface[]> | undefined;
   loadingCard: boolean = false;
   loadingAccount: boolean = false;
 
   constructor(
     private readonly cardsReqService: CardsRequestsService,
     private readonly accountsReqService: AccountsRequestsService,
-    snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef,
+    private readonly clientService: ClientRequestsService,
+    private readonly messageService: MessageService,
     private destroy$: DestroyService
-  ) { super(snackBar) }
+  ) { }
 
   ngOnInit(): void {
     this.loadingCard = true;
     this.loadingAccount = true;
     this.loadCards();
     this.loadAccounts();
+    this.getClient();
+  }
+
+  getClient(): void {
+    const token = localStorage.getItem('auth-accessToken');
+    if (token && token !== null) {
+      this.clientService.getClient().pipe(takeUntil(this.destroy$)).subscribe(
+        client => {
+          this.clientService.setClientData(client);
+        },
+        error => {
+          this.messageService.cardsAndAccountsOrClientErrorResponce(error);
+        }
+      );
+    }
   }
 
   loadCards(): void {
@@ -47,10 +58,9 @@ export class DashboardComponent extends MessageClass implements OnInit {
       next: (cards) => {
         this.loadingCard = false;
         this.cards = cards;
-        //this.cdr.detectChanges();
       },
       error: (error) => {
-        this.cardsAndAccountsErrorResponce(error);
+        this.messageService.cardsAndAccountsOrClientErrorResponce(error);
       }
     });
   }
@@ -62,10 +72,9 @@ export class DashboardComponent extends MessageClass implements OnInit {
       next: (accounts) => {
         this.loadingAccount = false;
         this.accounts = accounts;
-        //this.cdr.detectChanges();
       },
       error: (error) => {
-        this.cardsAndAccountsErrorResponce(error);
+        this.messageService.cardsAndAccountsOrClientErrorResponce(error);
       }
     });
   }
@@ -88,7 +97,7 @@ export class DashboardComponent extends MessageClass implements OnInit {
         return 'assets/images/mir_white.svg';
       case 'Visa':
         return 'assets/images/visa.svg';
-      case 'MasterCard':
+      case 'Mastercard':
         return 'assets/images/master-card.svg';
       case 'Maestro':
         return 'assets/images/maestro.svg';

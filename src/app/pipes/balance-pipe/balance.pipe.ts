@@ -5,6 +5,7 @@ type CurrencySymbolMap = {
   840: string;
   978: string;
   643: string;
+  156: string;
 };
 
 @Pipe({
@@ -24,6 +25,7 @@ export class BalancePipe implements PipeTransform {
       840: 'USD', 
       978: 'EUR',
       643: 'RUB',
+      156: 'CNY',
     };
     return currencySymbols[currencyCode as keyof CurrencySymbolMap] || 'Unknown';
   }

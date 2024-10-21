@@ -4,7 +4,7 @@ export interface ClientInterface {
     lastName: string;
     firstName: string;
     middleName: string;
-    sex: 'male' | 'female' | null;
+    sex: 'Male' | 'Female';
     birthdate: string;
     phoneNumber: string;
     address: string;

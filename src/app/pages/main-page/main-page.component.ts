@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MessageClass } from 'src/app/classes/message-class';
+import { MessageService } from 'src/app/services/message-service/message.service';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
 import { takeUntil } from 'rxjs/operators';
 
@@ -11,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./main-page.component.scss'],
   providers: [DestroyService],
 })
-export class MainPageComponent extends MessageClass implements OnInit {
+export class MainPageComponent implements OnInit {
 
   @Input() welcomeTextHeader: string = '';
   @Input() welcomeTextBody: string = '';
@@ -20,8 +19,8 @@ export class MainPageComponent extends MessageClass implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private destroy$: DestroyService,
-    snackBar: MatSnackBar
-  ) {super(snackBar)}
+    private readonly messageService: MessageService,
+  ) {}
 
   ngOnInit(): void {
     this.welcomeTextHeader = 'Добро пожаловать в лучший интернет-банк "Best Банк"';
@@ -29,7 +28,7 @@ export class MainPageComponent extends MessageClass implements OnInit {
   
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: Params) => {
       if (params['sessionFaild']) {
-        this.sessionErrorResponce();
+        this.messageService.errorMessage('Пожалуйста войдите в систему заново');
       }
     })
   }
