@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationValidationService } from 'src/app/pages/register-page/registration-validation/registration-validation.service';
 import { AuthorizationService } from 'src/app/services/authorization-service/authorization.service';
 import { Router } from '@angular/router';
 import { RegisterInterface } from 'src/app/models/register';
 import { takeUntil } from 'rxjs/operators'
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
-import { MessageClass } from 'src/app/classes/message-class';
+import { MessageService } from 'src/app/services/message-service/message.service';
 
 @Component({
   selector: 'app-register-page',
@@ -16,7 +15,7 @@ import { MessageClass } from 'src/app/classes/message-class';
   providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterPageComponent extends MessageClass implements OnInit {
+export class RegisterPageComponent implements OnInit {
   registrationForm!: FormGroup;
   hidePassword = true;
   hideConfirmPassword = true;
@@ -28,8 +27,8 @@ export class RegisterPageComponent extends MessageClass implements OnInit {
     private readonly router: Router,
     private readonly authService: AuthorizationService,
     private destroy$: DestroyService,
-    snackBar: MatSnackBar,
-  ) { super(snackBar) }
+    private readonly messageService: MessageService,
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -84,7 +83,7 @@ export class RegisterPageComponent extends MessageClass implements OnInit {
         firstName: formValues.firstName,
         lastName: formValues.lastName,
         middleName: formValues.middleName,
-        birthdate: formValues.birthDate,
+        birthdate: formValues.birthdate,
         sex: formValues.sex,
         phoneNumber: formValues.phoneNumber,
         address: formValues.address,
@@ -106,8 +105,7 @@ export class RegisterPageComponent extends MessageClass implements OnInit {
           });
         },
         error: (error) => {
-          this.registerErrorResponce(error);
-          //this.cdr.detectChanges();
+          this.messageService.loginOrRegisterOrLogoutErrorResponce(error);
           this.registrationForm.enable();
         }
       });

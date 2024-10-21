@@ -1,0 +1,35 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+        <h2 class="card-conteiner_top_text">Банковские карты</h2>
+        <a class="card-conteiner_top_route" routerLink="/home">Назад</a>
+    </div>
+        
+    <div *ngIf="products$ | async as products; else loader">
+        <div *ngIf="products.length !== 0; else message">
+            <div class="card-conteiner_cards" *ngFor="let product of products">
+                <app-card 
+                    [dataLeft]="'0000-0000-0000-0000'" 
+                    [backgroundColor]="product.id === 3 ? 'primary' : 'tertiary'">
+                </app-card>
+                <div class="card-conteiner_cards_info" >
+                    <p class="card-conteiner_cards_info_title">{{ product.name }}</p>
+                    <p class="card-conteiner_cards_info_data">{{ product.shortDescription }}</p>
+                    <button 
+                        (click)="product.id === 3 ? newOrderClick('Дебетовая карта') : newOrderClick('Кредитная карта')" 
+                        class="card-conteiner_cards_info_button">
+                        Заказать
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #message>
+    <span class="not-resolve">В данный момент нет доступных продуктов, обратитесь позже</span>
+</ng-template>
+
+<ng-template #loader >
+    <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-template>

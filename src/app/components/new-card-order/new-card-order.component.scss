@@ -1,0 +1,110 @@
+@import 'src/styles.scss';
+
+.card-conteiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 920px;
+    margin-bottom: 32px;
+
+    &_top {
+        height: 23px;
+        display: flex;
+        justify-content: space-between;
+        color: $color-text;
+        align-items: center;
+        
+        &_text {
+            display: flex;
+            justify-content: left;
+            gap: 40px;
+
+            &_t {
+                font-weight: bold;
+                font-size: 20px;
+                margin-bottom: 0;
+            }
+        }
+
+        &_route {
+            color: $color-text;
+            font-size: 15px;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &:active {
+                color: $color-orange-primary;
+            } 
+        }
+    }
+
+    &_cards {
+        margin-top: 20px;
+        border-radius: 20px;
+        background-color: $color-input-focus;
+        display: flex;
+        justify-content: left;
+        padding: 29px;
+        gap: 25px;
+        margin-bottom: 20px;
+
+        &_info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: $color-text;
+
+            &_title {
+                font-size: 15px;
+                margin-bottom: 0;
+            }
+
+            &_data {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &_body {
+        display: flex;
+        flex-direction: column;
+
+        &_button {
+            margin: auto;
+            width: 232px;
+            height: 37px;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: $color-orange-primary;
+            color: $color-white;
+            border-radius: 10px;
+        
+            &:hover {
+                opacity: 0.6;
+            }
+        
+            &:active {
+                opacity: 1;
+                background-color: $color-orange-active;
+            }
+        
+            &:disabled{
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+}
+
+img {
+    width: 70px;
+    height: 40px;
+}

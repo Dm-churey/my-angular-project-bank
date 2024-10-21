@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BirthdatePipe implements PipeTransform {
 
-  transform(birthdate: string): string {
+  transform(birthdate: string | undefined): string {
     if (!birthdate) return '';
     
     const birthDate = new Date(birthdate);

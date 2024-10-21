@@ -1,0 +1,64 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+        <div class="card-conteiner_top_text">
+            <h2 class="card-conteiner_top_text_t" style="font-weight:100;">{{ titleText }}</h2>
+            <h2 class="card-conteiner_top_text_t">{{ typeProduct }}</h2>
+        </div>
+        <a class="card-conteiner_top_route" routerLink="/new-card">Назад</a>
+    </div>
+
+    <div class="card-conteiner_body" *ngIf="!loaderRun">
+        <div class="card-conteiner_cards">
+            <app-card 
+                [dataLeft]="'0000-0000-0000-0000'" 
+                [backgroundColor]="typeProduct === 'Кредитная карта' || typeProduct === 'Дебетовая карта' ? 'tertiary' : 'primary'">
+            </app-card>
+            <div class="card-conteiner_cards_info" >
+                <p class="card-conteiner_cards_info_title">{{ typeProduct }}</p>
+                <p class="card-conteiner_cards_info_data">{{ actionText }}</p>
+                <div class="card-conteiner_cards_info_images" *ngIf="typeProduct === 'Кредитная карта' || typeProduct === 'Дебетовая карта'; else currency">
+                    <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedRadioButton" required>
+                        <mat-radio-button value="МИР">
+                            <img src="assets/images/mir-color.svg">
+                        </mat-radio-button>
+                        <mat-radio-button value="Visa">
+                            <img src="assets/images/visa.svg">
+                        </mat-radio-button>
+                        <mat-radio-button value="Mastercard">
+                            <img src="assets/images/master-card.svg">
+                        </mat-radio-button>
+                        <mat-radio-button value="Maestro">
+                            <img src="assets/images/maestro.svg">
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+    
+            </div>
+        </div>
+        
+        <button (click)="orderCardClick()" [disabled]="!selectedRadioButton" class="card-conteiner_body_button">{{ buttonText }}</button>
+        <!-- <button (click)="typeProduct === 'Кредитная карта' || typeProduct === 'Дебетовая карта' ? orderCardClick() : accountOrderClick()" [disabled]="!selectedRadioButton" class="card-conteiner_button">{{ buttonText }}</button> -->
+    </div>
+
+</div>
+
+<mat-spinner *ngIf="loaderRun" class="mat-spinner"></mat-spinner>
+
+<ng-template #currency>
+    <div class="card-conteiner_cards_info_images" *ngIf="typeProduct === 'Текущий счёт' || typeProduct === 'Накопительный счёт'">
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedRadioButton" required>
+            <mat-radio-button value="Российский Рубль">
+                <img src="assets/images/ruble_icon_black.svg">
+            </mat-radio-button>
+            <mat-radio-button value="Евро">
+                <img src="assets/images/euro_symbol_black.svg">
+            </mat-radio-button>
+            <mat-radio-button value="Доллар США">
+                <img src="assets/images/dollar_black.svg">
+            </mat-radio-button>
+            <mat-radio-button value="Китайский Юань">
+                <img src="assets/images/yan_black.svg">
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+</ng-template>
