@@ -1,0 +1,34 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+        <div class="card-conteiner_top_text">
+            <h2 class="card-conteiner_top_text_t" style="font-weight:100;">{{ titleText }}</h2>
+            <h2 class="card-conteiner_top_text_t">{{ typeProduct }}</h2>
+        </div>
+        <a class="card-conteiner_top_route" [routerLink]="['/order']" [queryParams]="{type: typeProduct}">Назад</a>
+    </div>
+
+    <div class="card-conteiner_cards" *ngIf="!loaderRun">
+        <div class="card-conteiner_cards_inside">
+            <p class="card-conteiner_cards_inside_title">Подтверждаете ли вы операцию</p>
+            <div  class="card-conteiner_cards_inside_data">
+                <div class="card-conteiner_cards_inside_data_inf">
+                    <label>ФИО:</label>
+                    <p class="card-conteiner_cards_inside_data_inf_text">{{ clientData?.firstName }} {{ clientData?.lastName }} {{ clientData?.middleName }}</p>
+                </div>
+                <div class="card-conteiner_cards_inside_data_inf">
+                    <label>Дата рождения:</label>
+                    <p class="card-conteiner_cards_inside_data_inf_text">{{ clientData?.birthdate | birthdate }}</p>
+                </div>
+                <div class="card-conteiner_cards_inside_data_inf">
+                    <label>Детали заказа:</label>
+                    <p class="card-conteiner_cards_inside_data_inf_text">{{ typeProduct }}</p>
+                    <p class="card-conteiner_cards_inside_data_inf_text">{{ detailsOrder }}</p>
+                </div>
+            </div>
+            <button (click)="onConfirm()" class="card-conteiner_cards_inside_button">Подтверждаю</button>
+        </div>
+    </div>
+
+</div>
+
+<mat-spinner *ngIf="loaderRun" class="mat-spinner"></mat-spinner>
