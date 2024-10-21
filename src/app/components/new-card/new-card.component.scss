@@ -1,0 +1,95 @@
+@import 'src/styles.scss';
+
+.card-conteiner {
+    display: flex;
+    flex-direction: column;
+    width: 920px;
+    margin-bottom: 32px;
+
+    &_top {
+        height: 23px;
+        display: flex;
+        justify-content: space-between;
+        color: $color-text;
+        align-items: center;
+        
+        &_text {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 0;
+        }
+
+        &_route {
+            color: $color-text;
+            font-size: 15px;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &:active {
+                color: $color-orange-primary;
+            } 
+        }
+    }
+
+    &_cards {
+        margin-top: 10px;
+        border-radius: 20px;
+        background-color: $color-input-focus;
+        display: flex;
+        justify-content: left;
+        padding: 29px;
+        gap: 25px;
+        margin-bottom: 20px;
+
+        &_info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            color: $color-text;
+            gap: 20px;
+
+            &_title {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 0;
+            }
+
+            &_data {
+                font-size: 15px;
+                margin-bottom: 0;
+            }
+
+            &_button {
+                align-items: center;
+                width: 164px;
+                height: 37px;
+                font-size: 15px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background-color: $color-orange-primary;
+                color: $color-white;
+                border-radius: 10px;
+            
+                &:hover {
+                    opacity: 0.6;
+                }
+            
+                &:active {
+                    opacity: 1;
+                    background-color: $color-orange-active;
+                }
+            }
+        }
+    } 
+}
+
+.not-resolve {
+    color: $color-orange-active;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 220px auto auto;
+}
