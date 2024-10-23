@@ -1,0 +1,37 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+        <h2 class="card-conteiner_top_text">{{ titleText }}</h2>
+        <a class="card-conteiner_top_route" routerLink="/home">Назад</a>
+    </div>
+
+    <div class="card-conteiner_cards">
+        <div *ngIf="accountRefillData$ | async as accountRefillData; else loader" class="card-conteiner_cards_inside">
+            <h2 class="card-conteiner_cards_inside_header">{{ accountRefillData.name }}</h2>
+            <form [formGroup]="formRefill" (ngSubmit)="onSubmit()" class="card-conteiner_cards_inside_form">
+
+                <div class="card-conteiner_cards_inside_form_form-group">
+                    <label for="account" class="label">Выберите счет</label>
+                    <select id="account" formControlName="account" placeholder="Счёт" [ngClass]="{'invalid' : formRefill.get('account')?.invalid && formRefill.get('account')?.touched}" class="form-control">
+                        <option *ngFor="let value of accountRefillData.stepParams[0].values" [value]="value">{{ value }}</option>
+                    </select>
+                    <span *ngIf="formRefill.get('account')?.invalid && (formRefill.get('account')?.dirty || formRefill.get('account')?.touched)" class="error-message">Обязательное поле</span>
+                </div>
+            
+                <div class="card-conteiner_cards_inside_form_form-group">
+                    <label for="amount" class="label">Введите сумму</label>
+                    <input id="amount" type="number" formControlName="amount" placeholder="Сумма" required [ngClass]="{'invalid' : formRefill.get('amount')?.invalid && formRefill.get('amount')?.touched}" class="form-control">
+                    <span *ngIf="formRefill.get('amount')?.invalid && (formRefill.get('amount')?.dirty || formRefill.get('amount')?.touched)" class="error-message">Сумма должна быть от 1 до 1000000</span>
+                </div>
+            
+                <button type="submit" [disabled]="!formRefill.valid || formRefill.disabled" class="card-conteiner_cards_inside_form_button">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<mat-spinner *ngIf="loaderRun" class="mat-spinner"></mat-spinner>
+
+<ng-template #loader>
+    <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-template>
