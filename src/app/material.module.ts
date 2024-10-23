@@ -9,6 +9,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ],
   exports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ]
 })
 export class MaterialModule { }

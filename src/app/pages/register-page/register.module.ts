@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { RegistrationValidationService } from './registration-validation/registration-validation.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RegistrationValidationService } from './registration-validation/registr
   imports: [
     CommonModule,
     MaterialModule,
+    HttpClientModule,
     RegisterRoutingModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),

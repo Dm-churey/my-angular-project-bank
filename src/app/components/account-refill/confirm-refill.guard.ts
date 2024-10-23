@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class OperationsGuard implements CanActivate {
+@Injectable()
+export class ConfirmRefillGuard implements CanActivate {
 
   constructor(private readonly router: Router) {}
 
@@ -16,9 +14,9 @@ export class OperationsGuard implements CanActivate {
     if (requestId && requestId !== '') {
       return of(true);
     } else {
-      this.router.navigate(['/new-card'], {
+      this.router.navigate(['/home'], {
         queryParams: {
-            orderDenied: true
+            operationDenied: true
         }
       })
       return of(false);

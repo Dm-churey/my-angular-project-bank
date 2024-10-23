@@ -13,4 +13,16 @@ export class AccountsRequestsService {
   getUserAccounts(): Observable<AccountDataInterface[]> {
     return this.http.get<AccountDataInterface[]>('/api/accounts');
   }
+
+  getUserAccountById(id: number): Observable<AccountDataInterface> {
+    return this.http.get<AccountDataInterface>(`/api/accounts/${id}`);
+  }
+
+  lockAccountById(id: number): Observable<AccountDataInterface> {
+    return this.http.patch<AccountDataInterface>(`/api/accounts/lock/${id}`, {});
+  }
+
+  unlockAccountById(id: number): Observable<AccountDataInterface> {
+    return this.http.patch<AccountDataInterface>(`/api/accounts/unlock/${id}`, {});
+  }
 }

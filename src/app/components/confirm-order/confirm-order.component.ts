@@ -42,7 +42,7 @@ export class ConfirmOrderComponent implements OnInit {
       this.titleText = 'Счета';
     }
 
-    this.clientService.client$.subscribe(client => {
+    this.clientService.client$.pipe(takeUntil(this.destroy$)).subscribe(client => {
       this.clientData = client;
     });
     

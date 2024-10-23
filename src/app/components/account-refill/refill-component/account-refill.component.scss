@@ -1,0 +1,145 @@
+@import 'src/styles.scss';
+
+.card-conteiner {
+    display: flex;
+    flex-direction: column;
+    width: 920px;
+    margin-bottom: 32px;
+
+    &_top {
+        height: 23px;
+        display: flex;
+        justify-content: space-between;
+        color: $color-text;
+        align-items: center;
+        
+        &_text {
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 0;
+        }
+
+        &_route {
+            color: $color-text;
+            font-size: 15px;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &:active {
+                color: $color-orange-primary;
+            } 
+        }
+    }
+
+    &_cards {
+        margin-top: 20px;
+        border-radius: 20px;
+        background-color: $color-input-focus;
+        display: flex;
+        justify-content: center;
+        padding: 29px;
+        gap: 25px;
+        margin-bottom: 20px;
+
+        &_inside {
+            width: 560px;
+            padding: 29px;
+            background-color: $color-white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: $color-text;
+            font-size: 20px;
+            gap: 10px;
+
+            &_header {
+                margin-bottom: 0;
+            }
+
+            &_form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &_form-group {
+                    margin-bottom: 20px;
+                
+                    .label {
+                        margin-bottom: 8px;
+                        font-size: 15px;
+                        color: $color-text;
+                    }
+                
+                    .form-control {
+                        width: 525px;
+                        padding: 12px 10px;
+                        font-size: 14px;
+                        border: 1px solid $color-form;
+                        border-radius: 4px;
+                        color: $color-text;
+                        outline: none;
+                        transition: all 0.3s ease;
+                
+                        &:focus{
+                            border-color: $color-blue;
+                            background-color: $color-input-focus;
+                            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+                        }
+                
+                        &::placeholder {
+                            color: $color-form;
+                        }
+                
+                        &.invalid {
+                            border-color: $color-error;
+                            background-color: #fcd1bf;
+                
+                            &::placeholder {
+                                color: #585555;
+                            }
+                        }
+                    }
+                }
+            
+                &_button {
+                    margin: auto;
+                    width: 232px;
+                    height: 37px;
+                    font-size: 15px;
+                    font-weight: bold;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    background-color: $color-orange-primary;
+                    color: $color-white;
+                    border-radius: 10px;
+                
+                    &:hover {
+                        opacity: 0.6;
+                    }
+                
+                    &:active {
+                        opacity: 1;
+                        background-color: $color-orange-active;
+                    }
+    
+                    &:disabled{
+                      opacity: 0.6;
+                      cursor: not-allowed;
+                    }
+                }
+            }
+
+
+        }
+    }
+}
+
+.error-message {
+    color: $color-orange-primary;
+    font-size: 12px;
+    margin-top: 5px;
+}

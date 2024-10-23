@@ -13,7 +13,6 @@ import { ClientInterface } from './models/client';
 })
 export class AppComponent implements OnInit {
   title = 'internet-bank';
-  client: ClientInterface | null = null;
 
   constructor(
     private readonly authService: AuthorizationService,

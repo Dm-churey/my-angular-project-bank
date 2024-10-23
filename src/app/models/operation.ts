@@ -5,6 +5,12 @@ export interface CardInfoInterface {
     shortDescription: string;
 }
 
+export interface OperationStepDetails {
+    accountValue: string;
+    amountValue: string;
+    operationName: string;
+}
+
 export interface StartOperationRequestInterface {
     operationCode: string;
 }
@@ -16,7 +22,7 @@ export interface OperationResponceInterface {
     name: string;
     operationCode: string;
     requestId: number;
-    startDate: Date;
+    startDate: string;
     stepId: number;
     stepParams: StepParam[]  
 }
