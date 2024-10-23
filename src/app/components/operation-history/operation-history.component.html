@@ -1,0 +1,39 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+        <h2 class="card-conteiner_top_text">История операций</h2>
+        <a class="card-conteiner_top_route" routerLink="/home">Назад</a>
+    </div>
+
+    <div *ngIf="operations$ | async as operations; else loader">
+        <div *ngFor="let operation of operations">
+            <div class="card-conteiner_data" [style.backgroundColor]="operation.isConfirmed && operation.isFinished ? 'rgb(153, 231, 159)' : !operation.isConfirmed && !operation.isFinished ? 'rgb(239, 155, 143)' : 'rgb(239, 233, 143)' ">
+                <div class="card-conteiner_data_box">
+                    <label class="card-conteiner_data_box_label">Название операции:</label>
+                    <p class="card-conteiner_data_box_text">{{ operation.name }}</p>
+                </div>
+                <div class="card-conteiner_data_box">
+                    <label class="card-conteiner_data_box_label">Дата создания:</label>
+                    <p class="card-conteiner_data_box_text">{{ operation.startDate | birthdate }}</p>
+                </div>
+                <div class="card-conteiner_data_box">
+                    <label class="card-conteiner_data_box_label">ID операции:</label>
+                    <p class="card-conteiner_data_box_text">{{ operation.requestId }}</p>
+                </div>
+                <div class="card-conteiner_data_box">
+                    <label class="card-conteiner_data_box_label">Операция подтверждена:</label>
+                    <p class="card-conteiner_data_box_text">{{ operation.isConfirmed }}</p>
+                </div>
+                <div class="card-conteiner_data_box">
+                    <label class="card-conteiner_data_box_label">Операция завершена:</label>
+                    <p class="card-conteiner_data_box_text">{{ operation.isFinished }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<ng-template #loader>
+    <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-template>
