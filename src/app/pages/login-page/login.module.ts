@@ -5,6 +5,8 @@ import { LoginPageComponent } from './login-page-component/login-page.component'
 import { LoginRoutingModule } from './login-routing.module';
 import { MaterialModule } from 'src/app/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrationValidationService } from '../register-page/registration-validation/registration-validation.service';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   exports: [
     RouterModule,
+  ],
+  providers: [
+    RegistrationValidationService,
   ]
 })
 export class LoginModule { }

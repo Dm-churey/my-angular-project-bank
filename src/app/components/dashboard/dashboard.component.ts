@@ -7,6 +7,7 @@ import { AccountsRequestsService } from 'src/app/services/accounts-requests-serv
 import { CardsRequestsService } from 'src/app/services/cadrs-requests-service/cards-requests.service';
 import { ClientRequestsService } from 'src/app/services/client-requests-service/client-requests.service';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
     private readonly accountsReqService: AccountsRequestsService,
     private readonly clientService: ClientRequestsService,
     private readonly messageService: MessageService,
+    private readonly route: ActivatedRoute,
     private destroy$: DestroyService
   ) { }
 
@@ -35,6 +37,14 @@ export class DashboardComponent implements OnInit {
     this.loadCards();
     this.loadAccounts();
     this.getClient();
+
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: Params) => {
+      if (params['operationError']) {
+        this.messageService.errorMessage('Ошибка операции');
+      } else if (params['operationDenied']) {
+        this.messageService.errorMessage('Для начала выберите операцию');
+      }
+    });
   }
 
   getClient(): void {

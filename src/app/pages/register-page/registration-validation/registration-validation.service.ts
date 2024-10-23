@@ -107,24 +107,6 @@ export class RegistrationValidationService {
     return null;
   };
 
-  // birthDateValidator(control: AbstractControl): ValidationErrors | null {
-  //   const birthDate = control.value;
-    
-  //   if (!birthDate) {
-  //     return { required: true };
-  //   }
-
-  //   const currentDate = new Date();
-  //   const birthYear = new Date(birthDate).getFullYear();
-  //   const age = currentDate.getFullYear() - birthYear;
-
-  //   if (age < 18 || age > 100) {
-  //     return { invalidAge: true };
-  //   }
-
-  //   return null;
-  // }
-
   addressValidator(control: AbstractControl): ValidationErrors | null {
     const address = control.value;
 

@@ -29,7 +29,7 @@
     &_body {
         height: 25px;
         display: flex;
-        justify-content: left;
+        justify-content: space-between;
         gap: 5px;
         
         &_balance {
@@ -38,6 +38,28 @@
             font-weight: bold;
             margin-bottom: 0;
             margin-top: 2px;
+        }
+
+        &_status {
+            margin: auto 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+
+            &-green {
+                background-color: green;
+                border: solid 1px rgb(0, 107, 0);
+            }
+
+            &-red {
+                background-color: rgb(235, 52, 52);
+                border: solid 1px rgb(255, 14, 14);
+            }
+
+            &-yellow {
+                background-color: rgb(245, 199, 72);
+                border: solid 1px rgb(255, 189, 8);
+            }
         }
     }
 
