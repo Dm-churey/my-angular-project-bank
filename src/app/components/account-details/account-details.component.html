@@ -1,0 +1,83 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+        <h2 class="card-conteiner_top_text">Счета</h2>
+        <a class="card-conteiner_top_route" routerLink="/home">Назад</a>
+    </div>
+        
+    <div *ngIf="account; else loader">
+        <div *ngIf="account.number !== null; else message">
+            <div class="card-conteiner_cards">
+                <app-card 
+                    [imageUrl]="''"
+                    [dataLeft]="account.number"
+                    [dataHead]="account.name"
+                    [dataBalance]="account.balance | balance : account.currency"
+                    [statusColor]="account.state === 'Active' ? 'green' : 'red'"
+                    [backgroundColor]="'secondary'">
+                </app-card>
+                <div class="card-conteiner_cards_info" >
+
+                    <p class="card-conteiner_cards_info_title">Информация о счёте</p>
+
+                    <div class="card-conteiner_cards_info_box">
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Название счёта:</label>
+                            <p class="card-conteiner_cards_info_box_data_text">{{ account.name }}</p>
+                        </div>
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Номер счёта:</label>
+                            <p class="card-conteiner_cards_info_box_data_text">{{ account.number }}</p>
+                        </div>
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Владелец счёта:</label>
+                            <div class="card-conteiner_cards_info_box_data_user">
+                                <p class="card-conteiner_cards_info_box_data_text">{{ account.client.firstName }} {{ account.client.lastName }}  {{ account.client.middleName }}</p>
+                                <p class="card-conteiner_cards_info_box_data_text">{{ account.client.birthdate | birthdate }}</p>
+                                <p class="card-conteiner_cards_info_box_data_text">{{ account.client.phoneNumber | phoneNumber }}</p>
+                            </div>
+                        </div>
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Баланс:</label>
+                            <p class="card-conteiner_cards_info_box_data_text">{{ account.balance | balance : account.currency }}</p>
+                        </div>
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Валюта:</label>
+                            <p *ngIf="account.currency === 643" class="card-conteiner_cards_info_box_data_text">Российский рубль</p>
+                            <p *ngIf="account.currency === 978" class="card-conteiner_cards_info_box_data_text">Евро</p>
+                            <p *ngIf="account.currency === 840" class="card-conteiner_cards_info_box_data_text">Доллар США</p>
+                            <p *ngIf="account.currency === 156" class="card-conteiner_cards_info_box_data_text">Китайский юань</p>
+                        </div>
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Дата открытия счёта:</label>
+                            <p class="card-conteiner_cards_info_box_data_text">{{ account.createdDate | birthdate }}</p>
+                        </div>
+                        <div class="card-conteiner_cards_info_box_data">
+                            <label class="card-conteiner_cards_info_box_data_label">Статус счёта:</label>
+                            <p class="card-conteiner_cards_info_box_data_text">{{ account.state }}</p>
+                        </div>
+                    </div>
+
+                    <p class="card-conteiner_cards_info_oper">Доступные операции</p>
+
+                    <div class="card-conteiner_cards_info_button">
+                        <button [disabled]="loading || account.state === 'Blocked'" class="card-conteiner_cards_info_button_refill" routerLink="/refill-account">Пополнить</button>
+                        <button [disabled]="loading || account.state === 'Blocked'" class="card-conteiner_cards_info_button_transfer" routerLink="/example">Перевести</button>
+                        <button [disabled]="loading" *ngIf="account.state === 'Active'" class="card-conteiner_cards_info_button_lockUnlock" (click)="onLockAccount('Заблокировать', account.id)">Заблокировать</button>
+                        <button [disabled]="loading" *ngIf="account.state === 'Blocked'" class="card-conteiner_cards_info_button_lockUnlock" (click)="onLockAccount('Разблокировать', account.id)">Разблокировать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<mat-spinner *ngIf="loading" class="mat-spinner"></mat-spinner>
+
+<ng-template #message>
+    <span class="not-resolve">Такого счёта не существует</span>
+</ng-template>
+
+<ng-template #loader >
+    <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-template>
