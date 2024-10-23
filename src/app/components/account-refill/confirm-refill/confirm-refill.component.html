@@ -1,0 +1,38 @@
+<div class="card-conteiner">
+    <div class="card-conteiner_top">
+            <h2 class="card-conteiner_top_text">Пополнение счёта</h2>
+        <a class="card-conteiner_top_route" routerLink="/home">Назад</a>
+    </div>
+
+    <div class="card-conteiner_cards" *ngIf="operation$ | async as operation; else loader">
+        <div class="card-conteiner_cards_inside">
+            <p class="card-conteiner_cards_inside_title">Подтверждаете ли вы операцию</p>
+            <p class="card-conteiner_cards_inside_oper">{{ operation.operationName }}</p>
+            <div  class="card-conteiner_cards_inside_data">
+                <div *ngIf="client$ | async as client; else loader">
+                    <div class="card-conteiner_cards_inside_data_inf">
+                        <label class="card-conteiner_cards_inside_data_inf_label">ФИО:</label>
+                        <p class="card-conteiner_cards_inside_data_inf_t">{{ client.firstName }} {{ client.lastName }} {{ client.middleName }}</p>
+                    </div>
+                </div>
+                <div class="card-conteiner_cards_inside_data_inf">
+                    <label class="card-conteiner_cards_inside_data_inf_label">Детали заказа:</label>
+                    <div class="card-conteiner_cards_inside_data_inf_details">
+                        <label class="card-conteiner_cards_inside_data_inf_details_label">Номер счёта</label>
+                        <p class="card-conteiner_cards_inside_data_inf_details_text">{{ operation.accountValue }}</p>
+                        <label class="card-conteiner_cards_inside_data_inf_details_label">Сумма</label>
+                        <p class="card-conteiner_cards_inside_data_inf_details_text">{{ operation.amountValue }}</p>
+                    </div>
+                </div>
+            </div>
+            <button [disabled]="loaderRun" (click)="onConfirm()" class="card-conteiner_cards_inside_button">Подтверждаю</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- <mat-spinner *ngIf="loaderRun" class="mat-spinner"></mat-spinner> -->
+
+<ng-template #loader>
+    <mat-spinner class="mat-spinner"></mat-spinner>
+</ng-template>
