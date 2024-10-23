@@ -13,6 +13,8 @@ import { ConfirmOrderComponent } from './components/confirm-order/confirm-order.
 import { CanDeactivateOperationsGuard } from './guards/can-deactivate-operations.guard';
 import { ExitOrderComponent } from './components/exit-order/exit-order.component';
 import { NewAccountComponent } from './components/new-account/new-account.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { OperationHistoryComponent } from './components/operation-history/operation-history.component';
 
 const routes: Routes = [
     { path: 'main', component: MainPageComponent },
@@ -43,6 +45,15 @@ const routes: Routes = [
             { path: 'confirm-order', component: ConfirmOrderComponent, canActivate: [OperationsGuard], canDeactivate: [CanDeactivateOperationsGuard] },
             { path: 'exit-order', component: ExitOrderComponent },
             { path: 'new-account', component:NewAccountComponent },
+            { 
+                path: 'refill-account',
+                loadChildren: () =>
+                    import('./components/account-refill/account-refill.module').then(
+                        m => m.AccountRefillModule
+                    ),
+            },
+            { path: 'account/:id', component: AccountDetailsComponent },
+            { path: 'operation-history', component: OperationHistoryComponent },
         ]
     },
     { path: '**', component: NotFoundPageComponent },

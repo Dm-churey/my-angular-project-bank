@@ -27,6 +27,8 @@ import { CanDeactivateOperationsGuard } from './guards/can-deactivate-operations
 import { DestroyService } from './services/destroy-service/destroy.service';
 import { ExitOrderComponent } from './components/exit-order/exit-order.component';
 import { NewAccountComponent } from './components/new-account/new-account.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { OperationHistoryComponent } from './components/operation-history/operation-history.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { NewAccountComponent } from './components/new-account/new-account.compon
     ConfirmOrderComponent,
     ExitOrderComponent,
     NewAccountComponent,
+    AccountDetailsComponent,
+    OperationHistoryComponent,
   ],
   imports: [
     MaterialModule,
