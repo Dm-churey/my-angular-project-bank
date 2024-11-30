@@ -10,7 +10,7 @@
             <app-card 
                 [routerLink]="'/card/' + card.id"
                 [imageUrl]="getCardImageUrl(card.cardProgram)"
-                [statusColor]="card.state === 'Created' ? 'yellow' : 'green'"
+                [statusColor]="card.state === 'Created' ? 'yellow' : card.state === 'Active' ? 'green': 'red'"
                 [dataLeft]="formatCardNumber(card.number)"
                 [dataRight]="card.month + '/' + card.year"
             ></app-card>

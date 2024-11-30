@@ -7,7 +7,7 @@ import { AccountsRequestsService } from 'src/app/services/accounts-requests-serv
 import { CardsRequestsService } from 'src/app/services/cadrs-requests-service/cards-requests.service';
 import { ClientRequestsService } from 'src/app/services/client-requests-service/client-requests.service';
 import { DestroyService } from 'src/app/services/destroy-service/destroy.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
